@@ -16,14 +16,17 @@ public class CustomEmbeddedConnector implements
         WebServerFactoryCustomizer<TomcatServletWebServerFactory> {
 // OR    implements WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> {
 
-
-        @Override
+    @Override
     public void customize(TomcatServletWebServerFactory factory) {
         if (factory instanceof TomcatServletWebServerFactory) {
             customizeTomcat(factory);
         }
     }
 
+    /**
+     * Customize Tomcat's Connector element located in server.xml
+     * @param factory
+     */
     public void customizeTomcat(TomcatServletWebServerFactory factory) {
         factory.addConnectorCustomizers(new TomcatConnectorCustomizer() {
             @Override
