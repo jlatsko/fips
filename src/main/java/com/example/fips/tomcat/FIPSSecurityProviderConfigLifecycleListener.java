@@ -46,6 +46,8 @@ public class FIPSSecurityProviderConfigLifecycleListener implements LifecycleLis
     public void lifecycleEvent(LifecycleEvent lifecycleEvent) {
         Boolean fipsMode = false;
         String fipsModeProperty = System.getProperty("org.bouncycastle.fips.approved_only");
+        // Pef Flor fips-mode setup --enable
+        // System.getProperty("fips-mode") returns "enable" if fips-mode is enabled - not sure
         if ("true".equalsIgnoreCase(fipsModeProperty)) {
             LOG.info("FIPS mode is enabled");
             fipsMode=true;
