@@ -30,16 +30,16 @@ public class FIPSSecurityProviderConfigLifecycleListener implements LifecycleLis
 //            }
 //
 //        }
-        //From the documentation - At the moment the configuration string is limited to setting the DRBG. The configuration string
-        //must always start with “C:” and finish with “ENABLE{ALL};”.
-        //In situations where the amount of entropy is constrained the default DRBG for the provider can be
-        //configured to use an DRBG chain based on a SHA-512 SP 800-90A DRBG as the internal DRBG
-        //providing a seed generation. To configure this use:
-        //“C:HYBRID;ENABLE{All};”
+//        //From the documentation - At the moment the configuration string is limited to setting the DRBG. The configuration string
+//        //must always start with “C:” and finish with “ENABLE{ALL};”.
+//        //In situations where the amount of entropy is constrained the default DRBG for the provider can be
+//        //configured to use an DRBG chain based on a SHA-512 SP 800-90A DRBG as the internal DRBG
+//        //providing a seed generation. To configure this use:
+//        //“C:HYBRID;ENABLE{All};”
 //        Security.insertProviderAt(new BouncyCastleFipsProvider("C:HYBRID;ENABLE{All};"),1);
-        //This is equivalent of security.provider.2=com.sun.net.ssl.internal.ssl.Provider BCFIPS
-        //Most likely not needed and can be omitted.
-        //Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider("BCFIPS"));
+//        //This is equivalent of security.provider.2=com.sun.net.ssl.internal.ssl.Provider BCFIPS
+//        //Most likely not needed and can be omitted.
+//        //Security.addProvider(new com.sun.net.ssl.internal.ssl.Provider("BCFIPS"));
 //    }
 
     @Override

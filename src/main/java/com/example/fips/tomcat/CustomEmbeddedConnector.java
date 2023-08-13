@@ -2,14 +2,9 @@ package com.example.fips.tomcat;
 
 import org.apache.catalina.connector.Connector;
 import org.springframework.boot.web.embedded.tomcat.TomcatConnectorCustomizer;
-//import org.springframework.boot.context.embedded.EmbeddedServletContainerCustomizer;
 import org.springframework.boot.web.embedded.tomcat.TomcatServletWebServerFactory;
 import org.springframework.boot.web.server.WebServerFactoryCustomizer;
-import org.springframework.boot.web.servlet.server.ConfigurableServletWebServerFactory;
 import org.springframework.stereotype.Component;
-import org.springframework.util.ResourceUtils;
-
-import java.io.FileNotFoundException;
 
 @Component
 public class CustomEmbeddedConnector implements
@@ -19,7 +14,8 @@ public class CustomEmbeddedConnector implements
     @Override
     public void customize(TomcatServletWebServerFactory factory) {
         if (factory instanceof TomcatServletWebServerFactory) {
-            customizeTomcat(factory);
+            customizeTomcatConnector(factory);
+            addFipsLifecycleListener(factory);
         }
     }
 
@@ -27,7 +23,7 @@ public class CustomEmbeddedConnector implements
      * Customize Tomcat's Connector element located in server.xml
      * @param factory
      */
-    public void customizeTomcat(TomcatServletWebServerFactory factory) {
+    public void customizeTomcatConnector(TomcatServletWebServerFactory factory) {
         factory.addConnectorCustomizers(new TomcatConnectorCustomizer() {
             @Override
             public void customize(Connector connector) {
@@ -51,6 +47,10 @@ public class CustomEmbeddedConnector implements
                 connector.setProperty("sslHostConfigCertificateKeystoreProvider", "BCFIPS");   // REVISIT:  is this correct?
             }
         });
+    }
+
+    public void addFipsLifecycleListener(TomcatServletWebServerFactory factory) {
+        factory.addContextLifecycleListeners(new FIPSSecurityProviderConfigLifecycleListener());
     }
 
 }
