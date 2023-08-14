@@ -242,4 +242,13 @@ Note: Ensure to use FIPS compliant cipher suites else we would run into exceptio
                               at java.security.Provider$Service.getImplClass(Provider.java:1704)
 
                               at java.security.Provider$Service.newInstance(Provider.java:1662)
-```
+
+B.  Converting the Java Certificate Authority keystore, cacerts:
+
+    Open an administrative command prompt in the folder containing the cacerts file for the current version of Java.
+    For example:  C:\jdk-8u251-windows-x64\jre\lib\security folder in version 10.0
+    Run the following command to convert the cacerts from JKS to BCFKS format:
+    keytool -importkeystore -srckeystore cacerts  -srcstoretype JKS -srcstorepass changeit -destkeystore cacerts.bcfks -deststorepass changeit -deststoretype BCFKS -providerclass com.safelogic.cryptocomply.jcajce.provider.CryptoComplyFipsProvider
+
+    Note:  The above command assumes the current cacerts password is changeit.  If you have used another password, please replace both password values with the new password.
+
