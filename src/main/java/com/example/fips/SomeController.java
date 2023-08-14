@@ -24,13 +24,9 @@ public class SomeController {
         try {
             prepareKeyPairGenerator(keySize);
             return "Key pair generated successfully! Key size: " + keySize;
-        } catch (Exception ex) {
+        } catch (Exception | Error ex) {
             PrintWriter pw = new PrintWriter(new StringWriter());
             ex.printStackTrace();
-            return pw.toString();
-        } catch (Error err) {
-            PrintWriter pw = new PrintWriter(new StringWriter());
-            err.printStackTrace();
             return pw.toString();
         }
     }
